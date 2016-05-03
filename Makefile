@@ -1,4 +1,4 @@
-all: prompt sublime guake ssh-key latex nodejs mocha
+all: prompt sublime guake ssh-key latex nodejs mocha chrome dropbox entry-languages
 
 sublime: sublimetext sublime-packages
 
@@ -73,3 +73,10 @@ ssh-key:
 	send ${pass}'\r'
 	expect 'Enter same passphrase again:'
 	send ${pass}'\r'
+
+chrome:
+
+dropbox:
+
+entry-languages:
+
