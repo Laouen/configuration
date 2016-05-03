@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="next_tab" mtime="1462243317" type="string">
+		<stringvalue>&lt;Primary&gt;Right</stringvalue>
+	</entry>
+	<entry name="previous_tab" mtime="1462243313" type="string">
+		<stringvalue>&lt;Primary&gt;Left</stringvalue>
+	</entry>
+</gconf>
