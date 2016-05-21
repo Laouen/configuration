@@ -109,3 +109,10 @@ ardour:
 	sudo add-apt-repository ppa:dobey/audiotools
 	sudo apt-get update
 	sudo apt-get install ardour
+
+update-guake-config:
+	git rm -rf guake/
+	cp -r ~/.gconf/apps/guake/ ./
+	git add guake/
+	git commit -m"updated guake config to current config"
+	git push 
