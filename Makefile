@@ -1,10 +1,13 @@
-all: prompt sublime guake ssh-key latex nodejs mocha chrome dropbox entry-languages
+all: update-pkdg prompt sublime guake ssh-key latex nodejs mocha chrome dropbox entry-languages
+
+update-pkdg:
+	sudo apt-get update && sudo apt-get dist-upgrade
 
 sublime: sublimetext sublime-packages
 
 sublime-packages: bamboo JSHint
 
-latex: texmaker texlive-full ibus-qt4
+latex: texmaker texlive-full ibus-qt4 spanish-speller-texmaker
 
 texmaker:
 	echo "Installing texmaker"
@@ -12,6 +15,11 @@ texmaker:
 	sudo dpkg -i texmaker_ubuntu_14.04_4.5_amd64.deb
 	sudo apt-get install -f
 	rm texmaker_ubuntu_14.04_4.5_amd64.deb
+
+spanish-speller-texmaker:
+	echo "Installing spanish speller for texmaker"
+	cp Documents/configuration/spanish-speller-texmaker/es_ES.dic /usr/share/myspell/dicts/
+	cp Documents/configuration/spanish-speller-texmaker/es_ES.aff /usr/share/myspell/dicts/
 
 ibus-qt4:
 	echo "Installing ibus-qt4"
@@ -50,7 +58,7 @@ mocha:
 	echo "Installing mocha"
 	npm install -g mocha
 
-guake:
+guake: oh-my-zsh
 	echo "Installing guake"
 	sudo apt-get install guake -y 
 	cp -f ./guake.desktop ~/.config/autostart/
@@ -74,9 +82,30 @@ ssh-key:
 	expect 'Enter same passphrase again:'
 	send ${pass}'\r'
 
+zsh:
+	echo "Installing zsh"
+	sudo apt-get install -y zsh
+
+curl:
+	echo "Installing curl"
+	sudo apt-get install -y curl
+
+oh-my-zsh: zsh curl
+	echo "Installing oh-my-zsh"
+	curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+
+
 chrome:
 
 dropbox:
 
 entry-languages:
 
+subversion:
+	echo "Installing subversion (svn)"
+	sudo apt-get install subversion
+
+ardour:
+	sudo add-apt-repository ppa:dobey/audiotools
+	sudo apt-get update
+	sudo apt-get install ardour
