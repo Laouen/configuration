@@ -3,9 +3,35 @@ all: update-pkdg prompt sublime guake ssh-key latex nodejs mocha chrome dropbox 
 update-pkdg:
 	sudo apt-get update && sudo apt-get dist-upgrade
 
+###################################
+## Sublime text and its packages ## # TODO(jsdoc comment plugin still left)
+###################################
+
 sublime: sublimetext sublime-packages
 
 sublime-packages: bamboo JSHint
+
+sublimetext: 
+	echo "Installing Sublime text 3"
+	wget http://download.sublimetext.com/sublime-text_build-3103_amd64.deb
+	sudo dpkg -i sublime-text_build-3103_amd64.deb
+	sudo apt-get install -f
+	rm  -text_build-3103_amd64.deb
+
+bamboo: 
+	echo "Installing Bamboo theme"
+	git clone https://github.com/gzhihao/bamboo-theme.git ~/home/lao/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
+	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
+	
+JSHint:
+	echo "Installing JSHint plugin"
+	git clone https://github.com/victorporof/Sublime-JSHint.git ~/.config/sublime-text-3/Packages/Sublime-JSHint
+
+
+###################################
+#### Latex editor and packages ####
+###################################
+
 
 latex: texmaker texlive-full ibus-qt4 spanish-speller-texmaker
 
@@ -29,25 +55,58 @@ texlive-full:
 	echo "Installing textlive-full"
 	sudo apt-get install texlive-full
 
+###################################
+#### Guake and prompt configs #####
+###################################
+
 prompt:
 	echo "Setting prompt"
 	cp -f ./bashrc ~/.bashrc
 
-sublimetext: 
-	echo "Installing Sublime text 3"
-	wget http://download.sublimetext.com/sublime-text_build-3103_amd64.deb
-	sudo dpkg -i sublime-text_build-3103_amd64.deb
-	sudo apt-get install -f
-	rm  -text_build-3103_amd64.deb
+guake: oh-my-zsh
+	echo "Installing guake"
+	sudo apt-get install guake -y 
+	cp -f ./guake.desktop ~/.config/autostart/
+	cp -rf ./guake/ ~/.gconf/apps/guake/
 
-bamboo: 
-	echo "Installing Bamboo theme"
-	git clone https://github.com/gzhihao/bamboo-theme.git ~/home/lao/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
-	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
-	
-JSHint:
-	echo "Installing JSHint plugin"
-	git clone https://github.com/victorporof/Sublime-JSHint.git ~/.config/sublime-text-3/Packages/Sublime-JSHint
+update-guake-config:
+	git rm -rf guake/
+	cp -r ~/.gconf/apps/guake/ ./
+	git add guake/
+	git commit -m"updated guake config to current config"
+	git push 
+
+###################################
+##### Shell script languages ###### # TODO(not ready yet)
+###################################
+
+oh-my-zsh: zsh curl
+	echo "Installing oh-my-zsh"
+	curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+
+zsh:
+	echo "Installing zsh"
+	sudo apt-get install -y zsh
+
+curl:
+	echo "Installing curl"
+	sudo apt-get install -y curl
+
+###################################
+##### Version control systems #####
+###################################
+
+subversion:
+	echo "Installing subversion (svn)"
+	sudo apt-get install subversion
+
+git:
+	echo "Installing git"
+	sudo apt-get install git
+
+###################################
+######## NodeJS and mocha ######### # TODO(not ready yet)
+###################################
 
 nodejs:
 	echo "Installing Node.js"
@@ -58,61 +117,17 @@ mocha:
 	echo "Installing mocha"
 	npm install -g mocha
 
-guake: oh-my-zsh
-	echo "Installing guake"
-	sudo apt-get install guake -y 
-	cp -f ./guake.desktop ~/.config/autostart/
-	cp -rf ./guake/ ~/.gconf/apps/guake/
-
-ssh-key:
-	echo "Generating ssh-key"
-	set timeout 5
-	apg -n 1 -a 1 > ssh-pass
-	pass=$( cat ssh-pass )
-	spawn ssh-keygen
-	expect 'Enter file in which to save the key (/home/lao/.ssh/id_rsa):'
-	send '\r'
-	expect {
-		timeout	{send_user '\n ssh key didn\'t exist'}
-		'Overwrite (y/n)?'
-	}
-	send 'y\r'
-	expect 'Enter passphrase (empty for no passphrase):'
-	send ${pass}'\r'
-	expect 'Enter same passphrase again:'
-	send ${pass}'\r'
-
-zsh:
-	echo "Installing zsh"
-	sudo apt-get install -y zsh
-
-curl:
-	echo "Installing curl"
-	sudo apt-get install -y curl
-
-oh-my-zsh: zsh curl
-	echo "Installing oh-my-zsh"
-	curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
-
-
-chrome:
-
-dropbox:
-
-entry-languages:
-
-subversion:
-	echo "Installing subversion (svn)"
-	sudo apt-get install subversion
+###################################
+####### Ardour and plugins ########  # TODO(not ready yet)
+###################################
 
 ardour:
 	sudo add-apt-repository ppa:dobey/audiotools
 	sudo apt-get update
 	sudo apt-get install ardour
 
-update-guake-config:
-	git rm -rf guake/
-	cp -r ~/.gconf/apps/guake/ ./
-	git add guake/
-	git commit -m"updated guake config to current config"
-	git push 
+chrome:
+
+dropbox:
+
+entry-languages:
