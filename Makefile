@@ -115,6 +115,13 @@ mocha:
 	echo "Installing mocha"
 	npm install -g mocha
 
+unit:
+	echo "Installing Unit.js module"
+	npm install -g unit.js
+sinon:
+	echo "Installing sinon"
+	npm install -g sinon
+
 ###################################
 ####### Ardour and plugins ########  # TODO(not ready yet)
 ###################################
