@@ -77,20 +77,18 @@ update-guake-config:
 	git push 
 
 ###################################
-##### Shell script languages ###### # TODO(not ready yet)
+##### Shell script languages ######
 ###################################
 
-oh-my-zsh: zsh curl
+oh-my-zsh: zsh
 	echo "Installing oh-my-zsh"
-	curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+	curl -L http://install.ohmyz.sh > install-oh-my-zsh.sh
+	sh install-oh-my-zsh.sh
+	rm install-oh-my-zsh.sh
 
 zsh:
 	echo "Installing zsh"
 	sudo apt-get install -y zsh
-
-curl:
-	echo "Installing curl"
-	sudo apt-get install -y curl
 
 ###################################
 ##### Version control systems #####
