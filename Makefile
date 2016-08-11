@@ -1,10 +1,11 @@
+
 all: update-pkdg prompt sublime guake ssh-key latex nodejs mocha chrome dropbox entry-languages
 
 update-pkdg:
 	sudo apt-get update && sudo apt-get dist-upgrade
 
 ###################################
-## Sublime text and its packages ## # TODO(jsdoc comment plugin still left)
+## Sublime text and its packages ##
 ###################################
 
 sublime: sublimetext sublime-packages
@@ -20,7 +21,7 @@ sublimetext:
 
 bamboo: 
 	echo "Installing Bamboo theme"
-	git clone https://github.com/gzhihao/bamboo-theme.git ~/home/lao/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
+	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	
 JSHint:
@@ -63,9 +64,11 @@ prompt:
 	echo "Setting prompt"
 	cp -f ./bashrc ~/.bashrc
 
-guake: oh-my-zsh
+guake:
 	echo "Installing guake"
 	sudo apt-get install guake -y 
+
+guake-configuration:
 	cp -f ./guake.desktop ~/.config/autostart/
 	cp -rf ./guake/ ~/.gconf/apps/guake/
 
@@ -102,6 +105,19 @@ git:
 	echo "Installing git"
 	sudo apt-get install git
 
+git-aliases:
+	echo "setting Git aliases"
+	git config --global alias.co checkout
+	git config --global alias.br branch
+	git config --global alias.ci commit
+	git config --global alias.st status
+	git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+git-configurations:
+	git config --global user.email "laouen.belloli@gmail.com"
+	git config --global user.name "Laouen"
+
+
 ###################################
 ######## NodeJS and mocha ######### # TODO(not ready yet)
 ###################################
@@ -113,14 +129,14 @@ nodejs:
 
 mocha:
 	echo "Installing mocha"
-	npm install -g mocha
+	sudo npm install -g mocha
 
 unit:
 	echo "Installing Unit.js module"
-	npm install -g unit.js
+	sudo npm install -g unit.js
 sinon:
 	echo "Installing sinon"
-	npm install -g sinon
+	sudo npm install -g sinon
 
 ###################################
 ####### Ardour and plugins ########  # TODO(not ready yet)
