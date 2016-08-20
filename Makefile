@@ -12,19 +12,21 @@ sublime: sublimetext sublime-packages
 
 sublime-packages: bamboo JSHint
 
+# For latest Ubuntus as 14.04 the next script would work instead
+# wget http://download.sublimetext.com/sublime-text_build-3103_amd64.deb
+# sudo dpkg -i sublime-text_build-3103_amd64.deb
+# sudo apt-get install -f
+# rm  sublime-text_build-3103_amd64.deb
 sublimetext: 
 	echo "Installing Sublime text 3"
-	wget http://download.sublimetext.com/sublime-text_build-3103_amd64.deb
-	sudo dpkg -i sublime-text_build-3103_amd64.deb
-	sudo apt-get install -f
-	rm  -text_build-3103_amd64.deb
+	sudo apt install sublime-text	
 
 bamboo: 
 	echo "Installing Bamboo theme"
 	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	
-JSHint:
+JSHint: nodejs
 	echo "Installing JSHint plugin"
 	git clone https://github.com/victorporof/Sublime-JSHint.git ~/.config/sublime-text-3/Packages/Sublime-JSHint
 
@@ -69,8 +71,7 @@ guake:
 	sudo apt-get install guake -y 
 
 guake-configuration:
-	cp -f ./guake.desktop ~/.config/autostart/
-	cp -rf ./guake/ ~/.gconf/apps/guake/
+	sh scripts/guake-configuration.sh
 
 update-guake-config:
 	git rm -rf guake/
@@ -122,10 +123,12 @@ git-configurations:
 ######## NodeJS and mocha ######### # TODO(not ready yet)
 ###################################
 
+# For latest Ubuntus as 14.04 the next script would work instead
+# curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+# sudo apt-get install nodejs
 nodejs:
 	echo "Installing Node.js"
-	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-	sudo apt-get install nodejs
+	sudo apt install nodejs
 
 mocha:
 	echo "Installing mocha"
