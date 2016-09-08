@@ -1,6 +1,7 @@
 {
 	"color_scheme": "Packages/Theme - Bamboo/Bamboo.tmTheme",
 	"font_size": 8,
+	"font_face": "monaco",
 	"ignored_packages":
 	[
 		"Vintage"

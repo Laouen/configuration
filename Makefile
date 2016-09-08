@@ -4,6 +4,21 @@ all: update-pkdg prompt sublime guake ssh-key latex nodejs mocha chrome dropbox 
 update-pkdg:
 	sudo apt-get update && sudo apt-get dist-upgrade
 
+#################################
+## fonts and general settings ###
+#################################
+
+font-monaco:
+	sh ./fonts/monaco.sh
+
+##################################
+############ python ############## 
+##################################
+
+pip:
+	echo "installing python-pip"
+	sudo apt install python-pip
+
 ###################################
 ## Sublime text and its packages ##
 ###################################
@@ -21,7 +36,8 @@ sublimetext:
 	echo "Installing Sublime text 3"
 	sudo apt install sublime-text	
 
-bamboo: 
+# install baboo theme with monaco font
+bamboo: monaco
 	echo "Installing Bamboo theme"
 	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
@@ -30,11 +46,9 @@ JSHint: nodejs
 	echo "Installing JSHint plugin"
 	git clone https://github.com/victorporof/Sublime-JSHint.git ~/.config/sublime-text-3/Packages/Sublime-JSHint
 
-
 ###################################
 #### Latex editor and packages ####
 ###################################
-
 
 latex: texmaker texlive-full ibus-qt4 spanish-speller-texmaker
 
@@ -93,6 +107,13 @@ oh-my-zsh: zsh
 zsh:
 	echo "Installing zsh"
 	sudo apt-get install -y zsh
+
+agnoster: patched-fonts powerline
+	echo "setting agnoster zsh theme and powerline patched fonts"
+	cp ./zshrc ~/.zshrc
+
+powerline:
+	pip install --user git+git://github.com/Lokaltog/powerline
 
 ###################################
 ##### Version control systems #####
