@@ -1,5 +1,5 @@
 
-all: update-pkdg prompt sublime guake ssh-key latex nodejs mocha chrome dropbox entry-languages
+all: update-pkdg prompt sublime bamboo ssh-key latex chrome font-monaco oh-my-zsh agnoster
 
 update-pkdg:
 	sudo apt-get update && sudo apt-get dist-upgrade
@@ -9,7 +9,16 @@ update-pkdg:
 #################################
 
 font-monaco:
+	echo "installing monaco"
 	sh ./fonts/monaco.sh
+
+powerline:
+	echo "installing powerline"
+	pip install --user git+git://github.com/Lokaltog/powerline
+
+font-monaco-patched:
+	echo "installing patched monaco"
+	sr ./fonts/potched_monaco.sh
 
 ##################################
 ############ python ############## 
@@ -37,7 +46,7 @@ sublimetext:
 	sudo apt install sublime-text	
 
 # install baboo theme with monaco font
-bamboo: monaco
+bamboo: font-monaco
 	echo "Installing Bamboo theme"
 	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
@@ -108,12 +117,9 @@ zsh:
 	echo "Installing zsh"
 	sudo apt-get install -y zsh
 
-agnoster: patched-fonts powerline
+agnoster: powerline patched-fonts
 	echo "setting agnoster zsh theme and powerline patched fonts"
 	cp ./zshrc ~/.zshrc
-
-powerline:
-	pip install --user git+git://github.com/Lokaltog/powerline
 
 ###################################
 ##### Version control systems #####
