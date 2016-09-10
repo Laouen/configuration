@@ -18,7 +18,7 @@ powerline:
 
 font-monaco-patched:
 	echo "installing patched monaco"
-	sr ./fonts/potched_monaco.sh
+	sh ./fonts/patched_monaco.sh
 
 ##################################
 ############ python ############## 
@@ -26,7 +26,7 @@ font-monaco-patched:
 
 pip:
 	echo "installing python-pip"
-	sudo apt install python-pip
+	sudo apt-get install python-pip
 
 ###################################
 ## Sublime text and its packages ##
@@ -36,15 +36,13 @@ sublime: sublimetext sublime-packages
 
 sublime-packages: bamboo JSHint
 
-# For latest Ubuntus as 14.04 the next script would work instead
-# wget http://download.sublimetext.com/sublime-text_build-3103_amd64.deb
-# sudo dpkg -i sublime-text_build-3103_amd64.deb
-# sudo apt-get install -f
-# rm  sublime-text_build-3103_amd64.deb
 sublimetext: 
 	echo "Installing Sublime text 3"
-	sudo apt install sublime-text	
-
+	wget http://download.sublimetext.com/sublime-text_build-3103_amd64.deb
+	sudo dpkg -i sublime-text_build-3103_amd64.deb
+	sudo apt-get install -f
+	rm  sublime-text_build-3103_amd64.deb
+	
 # install baboo theme with monaco font
 bamboo: font-monaco
 	echo "Installing Bamboo theme"
@@ -150,12 +148,10 @@ git-configurations:
 ######## NodeJS and mocha ######### # TODO(not ready yet)
 ###################################
 
-# For latest Ubuntus as 14.04 the next script would work instead
-# curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-# sudo apt-get install nodejs
 nodejs:
 	echo "Installing Node.js"
-	sudo apt install nodejs
+	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+	sudo apt-get install nodejs
 
 mocha:
 	echo "Installing mocha"
