@@ -140,6 +140,7 @@ git-aliases:
 	git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 git-configurations:
+	echo "setting Git user and email"
 	git config --global user.email "laouen.belloli@gmail.com"
 	git config --global user.name "Laouen"
 
