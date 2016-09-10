@@ -2,7 +2,7 @@
 all: update-pkdg prompt sublime bamboo ssh-key latex chrome font-monaco oh-my-zsh agnoster
 
 update-pkdg:
-	sudo apt-get update && sudo apt-get dist-upgrade
+	sudo apt update && sudo apt dist-upgrade
 
 #################################
 ## fonts and general settings ###
@@ -36,11 +36,6 @@ sublime: sublimetext sublime-packages
 
 sublime-packages: bamboo JSHint
 
-# For latest Ubuntus as 14.04 the next script would work instead
-# wget http://download.sublimetext.com/sublime-text_build-3103_amd64.deb
-# sudo dpkg -i sublime-text_build-3103_amd64.deb
-# sudo apt-get install -f
-# rm  sublime-text_build-3103_amd64.deb
 sublimetext: 
 	echo "Installing Sublime text 3"
 	sudo apt install sublime-text	
@@ -65,7 +60,7 @@ texmaker:
 	echo "Installing texmaker"
 	wget http://www.xm1math.net/texmaker/texmaker_ubuntu_14.04_4.5_amd64.deb
 	sudo dpkg -i texmaker_ubuntu_14.04_4.5_amd64.deb
-	sudo apt-get install -f
+	sudo apt install -f
 	rm texmaker_ubuntu_14.04_4.5_amd64.deb
 
 spanish-speller-texmaker:
@@ -75,11 +70,11 @@ spanish-speller-texmaker:
 
 ibus-qt4:
 	echo "Installing ibus-qt4"
-	sudo apt-get install ibus-qt4
+	sudo apt install ibus-qt4
 
 texlive-full:
 	echo "Installing textlive-full"
-	sudo apt-get install texlive-full
+	sudo apt install texlive-full
 
 ###################################
 #### Guake and prompt configs #####
@@ -91,7 +86,7 @@ prompt:
 
 guake:
 	echo "Installing guake"
-	sudo apt-get install guake -y 
+	sudo apt install guake -y 
 
 guake-configuration:
 	sh scripts/guake-configuration.sh
@@ -115,7 +110,7 @@ oh-my-zsh: zsh
 
 zsh:
 	echo "Installing zsh"
-	sudo apt-get install -y zsh
+	sudo apt install -y zsh
 
 agnoster: powerline patched-fonts
 	echo "setting agnoster zsh theme and powerline patched fonts"
@@ -127,11 +122,11 @@ agnoster: powerline patched-fonts
 
 subversion:
 	echo "Installing subversion (svn)"
-	sudo apt-get install subversion
+	sudo apt install subversion
 
 git:
 	echo "Installing git"
-	sudo apt-get install git
+	sudo apt install git
 
 git-aliases:
 	echo "setting Git aliases"
@@ -150,9 +145,6 @@ git-configurations:
 ######## NodeJS and mocha ######### # TODO(not ready yet)
 ###################################
 
-# For latest Ubuntus as 14.04 the next script would work instead
-# curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-# sudo apt-get install nodejs
 nodejs:
 	echo "Installing Node.js"
 	sudo apt install nodejs
@@ -174,8 +166,8 @@ sinon:
 
 ardour:
 	sudo add-apt-repository ppa:dobey/audiotools
-	sudo apt-get update
-	sudo apt-get install ardour
+	sudo apt update
+	sudo apt install ardour
 
 ###################################
 ######### Chrome browser ##########
@@ -184,5 +176,5 @@ ardour:
 chrome:
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
-	sudo apt-get install -f
+	sudo apt install -f
 	rm google-chrome-stable_current_amd64
