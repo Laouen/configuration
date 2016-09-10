@@ -18,7 +18,7 @@ powerline:
 
 font-monaco-patched:
 	echo "installing patched monaco"
-	sr ./fonts/potched_monaco.sh
+	sh ./fonts/patched_monaco.sh
 
 ##################################
 ############ python ############## 
