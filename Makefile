@@ -178,3 +178,8 @@ chrome:
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
 	sudo apt install -f
 	rm google-chrome-stable_current_amd64
+
+keepass:
+	sudo add-apt-repository ppa:eugenesan/ppa
+	sudo apt update
+	sudo apt install keepassx
