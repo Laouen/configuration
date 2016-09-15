@@ -140,6 +140,24 @@ git-configurations:
 	git config --global user.email "laouen.belloli@gmail.com"
 	git config --global user.name "Laouen"
 
+##################################
+############ SSH #################
+##################################
+
+ssh-deamon:
+	echo "installing ssh on deamong to acces the computer"
+	sudo apt-get install openssh-server
+	sudo restart ssh
+
+##################################
+###### Shell customizations ######
+##################################
+
+fzf:
+	echo "installing fzf march version"
+	git clone --depth 1 https://github.com/m2march/fzf.git ~/.fzf
+	~/.fzf/install
+
 
 ###################################
 ######## NodeJS and mocha ######### # TODO(not ready yet)
