@@ -147,7 +147,7 @@ git-configurations:
 ssh-deamon:
 	echo "installing ssh on deamong to acces the computer"
 	sudo apt-get install openssh-server
-	sudo restart ssh
+	sudo ufw allow 22
 
 ##################################
 ###### Shell customizations ######
