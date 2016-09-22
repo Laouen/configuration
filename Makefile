@@ -112,7 +112,7 @@ zsh:
 	echo "Installing zsh"
 	sudo apt install -y zsh
 
-agnoster: powerline patched-fonts
+agnoster: powerline fonts-monaco-patched
 	echo "setting agnoster zsh theme and powerline patched fonts"
 	cp ./zshrc ~/.zshrc
 
