@@ -58,10 +58,7 @@ latex: texmaker texlive-full ibus-qt4 spanish-speller-texmaker
 
 texmaker:
 	echo "Installing texmaker"
-	wget http://www.xm1math.net/texmaker/texmaker_ubuntu_14.04_4.5_amd64.deb
-	sudo dpkg -i texmaker_ubuntu_14.04_4.5_amd64.deb
-	sudo apt install -f
-	rm texmaker_ubuntu_14.04_4.5_amd64.deb
+	sudo apt install texmaker
 
 spanish-speller-texmaker:
 	echo "Installing spanish speller for texmaker"
