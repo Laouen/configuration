@@ -201,3 +201,10 @@ keepass:
 	sudo add-apt-repository ppa:eugenesan/ppa
 	sudo apt update
 	sudo apt install keepassx
+
+###################################
+########## Shell tools ############
+###################################
+
+byobu:
+	sudo apt install byobu
