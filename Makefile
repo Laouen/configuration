@@ -58,10 +58,7 @@ latex: texmaker texlive-full ibus-qt4 spanish-speller-texmaker
 
 texmaker:
 	echo "Installing texmaker"
-	wget http://www.xm1math.net/texmaker/texmaker_ubuntu_14.04_4.5_amd64.deb
-	sudo dpkg -i texmaker_ubuntu_14.04_4.5_amd64.deb
-	sudo apt install -f
-	rm texmaker_ubuntu_14.04_4.5_amd64.deb
+	sudo apt install texmaker
 
 spanish-speller-texmaker:
 	echo "Installing spanish speller for texmaker"
@@ -112,7 +109,7 @@ zsh:
 	echo "Installing zsh"
 	sudo apt install -y zsh
 
-agnoster: powerline patched-fonts
+agnoster: powerline fonts-monaco-patched
 	echo "setting agnoster zsh theme and powerline patched fonts"
 	cp ./zshrc ~/.zshrc
 
