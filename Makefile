@@ -40,6 +40,12 @@ sublimetext:
 	echo "Installing Sublime text 3"
 	sudo apt install sublime-text	
 
+
+# base 16 highlighter
+
+base16-sublime:
+	git clone git://github.com/chriskempson/base16-textmate.git ~/.config/sublime-text-3/Packages/Base16
+
 # install baboo theme with monaco font
 bamboo: font-monaco
 	echo "Installing Bamboo theme"
