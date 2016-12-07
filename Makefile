@@ -211,3 +211,10 @@ keepass:
 
 byobu:
 	sudo apt install byobu
+
+###################################
+############ redshift #############
+###################################
+
+redshift:
+	sudo apt install redshift redshift-gtk
