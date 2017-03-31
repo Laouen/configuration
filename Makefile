@@ -1,4 +1,5 @@
 
+.PHONY: spanish-speller-texmaker
 all: update-pkdg prompt sublime bamboo ssh-key latex chrome font-monaco oh-my-zsh agnoster
 
 update-pkdg:
@@ -68,8 +69,8 @@ texmaker:
 
 spanish-speller-texmaker:
 	echo "Installing spanish speller for texmaker"
-	cp Documents/configuration/spanish-speller-texmaker/es_ES.dic /usr/share/myspell/dicts/
-	cp Documents/configuration/spanish-speller-texmaker/es_ES.aff /usr/share/myspell/dicts/
+	cp spanish-speller-texmaker/es_ES.dic /usr/share/myspell/dicts/
+	cp spanish-speller-texmaker/es_ES.aff /usr/share/myspell/dicts/
 
 ibus-qt4:
 	echo "Installing ibus-qt4"
