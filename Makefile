@@ -43,9 +43,7 @@ sublimetext:
 	sudo apt update
 	sudo apt install sublime-text-installer
 
-
 # base 16 highlighter
-
 base16-sublime:
 	git clone git://github.com/chriskempson/base16-textmate.git ~/.config/sublime-text-3/Packages/Base16
 
@@ -53,6 +51,8 @@ base16-sublime:
 bamboo: font-monaco
 	echo "Installing Bamboo theme"
 	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
+
+sublime-preferences:
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	
 JSHint: nodejs
