@@ -1,5 +1,5 @@
 
-.PHONY: spanish-speller-texmaker
+.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco-patched
 all: update-pkdg prompt sublime bamboo ssh-key latex chrome font-monaco oh-my-zsh agnoster
 
 update-pkdg:
@@ -39,7 +39,9 @@ sublime-packages: bamboo JSHint
 
 sublimetext: 
 	echo "Installing Sublime text 3"
-	sudo apt install sublime-text	
+	sudo add-apt-repository ppa:webupd8team/sublime-text-3
+	sudo apt update
+	sudo apt install sublime-text-installer
 
 
 # base 16 highlighter
@@ -106,7 +108,10 @@ update-guake-config:
 ##### Shell script languages ######
 ###################################
 
-oh-my-zsh: zsh
+curl: 
+	sudo apt install curl
+
+oh-my-zsh: zsh curl
 	echo "Installing oh-my-zsh"
 	curl -L http://install.ohmyz.sh > install-oh-my-zsh.sh
 	sh install-oh-my-zsh.sh
@@ -116,7 +121,7 @@ zsh:
 	echo "Installing zsh"
 	sudo apt install -y zsh
 
-agnoster: powerline fonts-monaco-patched
+agnoster: pip powerline fonts-monaco-patched
 	echo "setting agnoster zsh theme and powerline patched fonts"
 	cp ./zshrc ~/.zshrc
 
