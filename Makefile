@@ -1,5 +1,5 @@
 
-.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco-patched
+.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco-patched sublime
 all: update-pkdg prompt sublime bamboo ssh-key latex chrome font-monaco oh-my-zsh agnoster
 
 update-pkdg:
