@@ -71,8 +71,8 @@ texmaker:
 
 spanish-speller-texmaker:
 	echo "Installing spanish speller for texmaker"
-	cp spanish-speller-texmaker/es_ES.dic /usr/share/myspell/dicts/
-	cp spanish-speller-texmaker/es_ES.aff /usr/share/myspell/dicts/
+	sudo cp spanish-speller-texmaker/es_ES.dic /usr/share/myspell/dicts/
+	sudo cp spanish-speller-texmaker/es_ES.aff /usr/share/myspell/dicts/
 
 ibus-qt4:
 	echo "Installing ibus-qt4"
