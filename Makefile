@@ -1,6 +1,6 @@
 
-.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco-patched sublime
-all: update-pkdg prompt sublime bamboo ssh-key latex chrome font-monaco oh-my-zsh agnoster
+.PHONY: spanish-speller-texmaker guake pip powerline font-monaco-patched font-monaco agnoster sublime oh-my-zsh
+all: update-pkdg prompt sublime bamboo ssh-key latex chrome oh-my-zsh agnoster
 
 update-pkdg:
 	sudo apt update && sudo apt dist-upgrade
@@ -9,6 +9,7 @@ update-pkdg:
 ## fonts and general settings ###
 #################################
 
+# God font monaco to install and use with oh my zsh
 font-monaco:
 	echo "installing monaco"
 	sh ./fonts/monaco.sh
@@ -17,6 +18,7 @@ powerline:
 	echo "installing powerline"
 	pip install --user git+git://github.com/Lokaltog/powerline
 
+# This font has some issues when working with oh my zsh
 font-monaco-patched:
 	echo "installing patched monaco"
 	sh ./fonts/patched_monaco.sh
@@ -25,6 +27,23 @@ font-monaco-patched:
 ############ python ############## 
 ##################################
 
+# current stable version is 4.2.0
+# in the checksum sha256sum the result should be something like:
+# 73b51715a12b6382dd4df3dd1905b531bd6792d4aa7273b2377a0436d45f0e78  Anaconda3-4.2.0-Linux-x86_64.sh
+anaconda:
+	echo "installing anaconda"
+	cd /tmp
+	curl -O https://repo.continuum.io/archive/Anaconda3-${version}-Linux-x86_64.sh
+	sha256sum Anaconda3-${version}-Linux-x86_64.sh
+	sudo bash ./Anaconda3-${version}-Linux-x86_64.sh
+	source ~/.bashrc
+	source ~/.zshrc
+	echo '' >> ~/.zshrc
+	echo '# added by Anaconda3 4.2.0 installer' >> ~/.zshrc
+	echo 'export PATH="/opt/anaconda3/bin:$PATH"' >> ~/.zshrc
+	soruce ~/.zshrc
+	cd -
+
 pip:
 	echo "installing python-pip"
 	sudo apt install python-pip
@@ -32,10 +51,6 @@ pip:
 ###################################
 ## Sublime text and its packages ##
 ###################################
-
-sublime: sublimetext sublime-packages
-
-sublime-packages: bamboo JSHint
 
 sublimetext: 
 	echo "Installing Sublime text 3"
@@ -71,8 +86,8 @@ texmaker:
 
 spanish-speller-texmaker:
 	echo "Installing spanish speller for texmaker"
-	cp spanish-speller-texmaker/es_ES.dic /usr/share/myspell/dicts/
-	cp spanish-speller-texmaker/es_ES.aff /usr/share/myspell/dicts/
+	sudo cp spanish-speller-texmaker/es_ES.dic /usr/share/myspell/dicts/
+	sudo cp spanish-speller-texmaker/es_ES.aff /usr/share/myspell/dicts/
 
 ibus-qt4:
 	echo "Installing ibus-qt4"
@@ -94,7 +109,7 @@ guake:
 	echo "Installing guake"
 	sudo apt install guake -y 
 
-guake-configuration:
+guake-configuration: agnoster
 	sh scripts/guake-configuration.sh
 
 update-guake-config:
@@ -104,9 +119,9 @@ update-guake-config:
 	git commit -m"updated guake config to current config"
 	git push 
 
-###################################
-##### Shell script languages ######
-###################################
+########################################
+##### Shell languages and plugins ######
+########################################
 
 curl: 
 	sudo apt install curl
@@ -121,7 +136,7 @@ zsh:
 	echo "Installing zsh"
 	sudo apt install -y zsh
 
-agnoster: pip powerline fonts-monaco-patched
+agnoster: pip powerline font-monaco
 	echo "setting agnoster zsh theme and powerline patched fonts"
 	cp ./zshrc ~/.zshrc
 
@@ -153,6 +168,10 @@ git-configurations:
 ##################################
 ############ SSH #################
 ##################################
+
+ssh-client:
+	echo "installing ssh client to acces remote servers"
+	sudo apt install openssh-client
 
 ssh-deamon:
 	echo "installing ssh on deamong to acces the computer"
@@ -187,15 +206,6 @@ unit:
 sinon:
 	echo "Installing sinon"
 	sudo npm install -g sinon
-
-###################################
-####### Ardour and plugins ########  # TODO(not ready yet)
-###################################
-
-ardour:
-	sudo add-apt-repository ppa:dobey/audiotools
-	sudo apt update
-	sudo apt install ardour
 
 ###################################
 ######### Chrome browser ##########
