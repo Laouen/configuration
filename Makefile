@@ -1,6 +1,6 @@
 
 .PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco-patched sublime
-all: update-pkdg prompt sublime bamboo ssh-key latex chrome font-monaco oh-my-zsh agnoster
+all: update-pkdg prompt sublime ssh-key latex chrome font-monaco oh-my-zsh agnoster
 
 update-pkdg:
 	sudo apt update && sudo apt dist-upgrade
@@ -33,11 +33,9 @@ pip:
 ## Sublime text and its packages ##
 ###################################
 
-#TODO: make full spaceblack - monaco - base16 configuration automatically
+sublime: sublimetext sublime-packages sublime-preferences
 
-sublime: sublimetext sublime-packages
-
-sublime-packages: JSHint
+sublime-packages: sublime-package-JSHint
 
 sublimetext: 
 	echo "Installing Sublime text 3"
@@ -45,19 +43,29 @@ sublimetext:
 	sudo apt update
 	sudo apt install sublime-text-installer
 
+sublime-theme-spaceblack:
+	echo "Installing spacebalck sublime theme"
+	sudo apt install unzip # needed to unzip the downloaded theme 
+	wget https://github.com/saadq/Spaceblack/archive/master.zip
+	unzip master.zip
+	mv Spaceblack-master ~/.config/sublime-text-3/Packages/Theme\ -\ Spaceblack
+	rm master.zip
+
 # base 16 highlighter
-base16-sublime:
+sublime-highlither-base16:
+	echo "Installing base 16 highlighters"
 	git clone git://github.com/chriskempson/base16-textmate.git ~/.config/sublime-text-3/Packages/Base16
 
 # install baboo theme with monaco font
-bamboo: font-monaco
-	echo "Installing Bamboo theme"
+sublime-theme-bamboo: font-monaco
+	echo "Installing Bamboo sublime theme"
 	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
 
-sublime-preferences:
+sublime-preferences: sublime-theme-spaceblack # spaceblack theme must be installed to not crash wen set as theme
+	echo "Copying sublime preferences"
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	
-JSHint: nodejs
+sublime-package-JSHint: nodejs
 	echo "Installing JSHint plugin"
 	git clone https://github.com/victorporof/Sublime-JSHint.git ~/.config/sublime-text-3/Packages/Sublime-JSHint
 
