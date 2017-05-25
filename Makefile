@@ -1,6 +1,5 @@
-
-.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco-patched sublime
-all: update-pkdg prompt sublime ssh-key latex chrome font-monaco oh-my-zsh agnoster
+.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco sublime
+all: update-pkdg prompt sublime ssh-key latex chrome oh-my-zsh-all guake-all byobu git-all
 
 update-pkdg:
 	sudo apt update && sudo apt dist-upgrade
@@ -9,6 +8,7 @@ update-pkdg:
 ## fonts and general settings ###
 #################################
 
+# God font monaco to install and use with oh my zsh
 font-monaco:
 	echo "installing monaco"
 	sh ./fonts/monaco.sh
@@ -17,6 +17,7 @@ powerline:
 	echo "installing powerline"
 	pip install --user git+git://github.com/Lokaltog/powerline
 
+# This font has some issues when working with oh my zsh
 font-monaco-patched:
 	echo "installing patched monaco"
 	sh ./fonts/patched_monaco.sh
@@ -24,6 +25,23 @@ font-monaco-patched:
 ##################################
 ############ python ############## 
 ##################################
+
+# current stable version is 4.2.0
+# in the checksum sha256sum the result should be something like:
+# 73b51715a12b6382dd4df3dd1905b531bd6792d4aa7273b2377a0436d45f0e78  Anaconda3-4.2.0-Linux-x86_64.sh
+anaconda:
+	echo "installing anaconda"
+	cd /tmp
+	curl -O https://repo.continuum.io/archive/Anaconda3-${version}-Linux-x86_64.sh
+	sha256sum Anaconda3-${version}-Linux-x86_64.sh
+	sudo bash ./Anaconda3-${version}-Linux-x86_64.sh
+	source ~/.bashrc
+	source ~/.zshrc
+	echo '' >> ~/.zshrc
+	echo '# added by Anaconda3 4.2.0 installer' >> ~/.zshrc
+	echo 'export PATH="/opt/anaconda3/bin:$PATH"' >> ~/.zshrc
+	soruce ~/.zshrc
+	cd -
 
 pip:
 	echo "installing python-pip"
@@ -43,9 +61,8 @@ sublimetext:
 	sudo apt update
 	sudo apt install sublime-text-installer
 
-sublime-theme-spaceblack:
-	echo "Installing spacebalck sublime theme"
-	sudo apt install unzip # needed to unzip the downloaded theme 
+sublime-theme-spaceblack: unzip
+	echo "Installing spacebalck sublime theme" 
 	wget https://github.com/saadq/Spaceblack/archive/master.zip
 	unzip master.zip
 	mv Spaceblack-master ~/.config/sublime-text-3/Packages/Theme\ -\ Spaceblack
@@ -56,12 +73,11 @@ sublime-highlither-base16:
 	echo "Installing base 16 highlighters"
 	git clone git://github.com/chriskempson/base16-textmate.git ~/.config/sublime-text-3/Packages/Base16
 
-# install baboo theme with monaco font
-sublime-theme-bamboo: font-monaco
+sublime-theme-bamboo:
 	echo "Installing Bamboo sublime theme"
 	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
 
-sublime-preferences: sublime-theme-spaceblack # spaceblack theme must be installed to not crash wen set as theme
+sublime-preferences: font-monaco sublime-theme-spaceblack # spaceblack theme must be installed to not crash wen set as theme
 	echo "Copying sublime preferences"
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	
@@ -93,18 +109,24 @@ texlive-full:
 	sudo apt install texlive-full
 
 ###################################
-#### Guake and prompt configs #####
+############# prompt ##############
 ###################################
 
 prompt:
 	echo "Setting prompt"
 	cp -f ./bashrc ~/.bashrc
 
+###################################
+############## Guake ##############
+###################################
+
+guake-all: guake guake-configuration
+
 guake:
 	echo "Installing guake"
 	sudo apt install guake -y 
 
-guake-configuration:
+guake-configuration: agnoster
 	sh scripts/guake-configuration.sh
 
 update-guake-config:
@@ -114,12 +136,11 @@ update-guake-config:
 	git commit -m"updated guake config to current config"
 	git push 
 
-###################################
-##### Shell script languages ######
-###################################
+########################################
+##### Shell languages and plugins ######
+########################################
 
-curl: 
-	sudo apt install curl
+oh-my-zsh-all: oh-my-zsh agnoster
 
 oh-my-zsh: zsh curl
 	echo "Installing oh-my-zsh"
@@ -131,7 +152,7 @@ zsh:
 	echo "Installing zsh"
 	sudo apt install -y zsh
 
-agnoster: pip powerline fonts-monaco-patched
+agnoster: pip powerline font-monaco
 	echo "setting agnoster zsh theme and powerline patched fonts"
 	cp ./zshrc ~/.zshrc
 
@@ -142,6 +163,8 @@ agnoster: pip powerline fonts-monaco-patched
 subversion:
 	echo "Installing subversion (svn)"
 	sudo apt install subversion
+
+git-all: git git-aliases git-configurations
 
 git:
 	echo "Installing git"
@@ -164,6 +187,10 @@ git-configurations:
 ############ SSH #################
 ##################################
 
+ssh-client:
+	echo "installing ssh client to acces remote servers"
+	sudo apt install openssh-client
+
 ssh-deamon:
 	echo "installing ssh on deamong to acces the computer"
 	sudo apt-get install openssh-server
@@ -178,6 +205,12 @@ fzf:
 	git clone --depth 1 https://github.com/m2march/fzf.git ~/.fzf
 	~/.fzf/install
 
+###################################
+########## Shell tools ############
+###################################
+
+byobu:
+	sudo apt install byobu
 
 ###################################
 ######## NodeJS and mocha ######### # TODO(not ready yet)
@@ -199,39 +232,34 @@ sinon:
 	sudo npm install -g sinon
 
 ###################################
-####### Ardour and plugins ########  # TODO(not ready yet)
-###################################
-
-ardour:
-	sudo add-apt-repository ppa:dobey/audiotools
-	sudo apt update
-	sudo apt install ardour
-
-###################################
-######### Chrome browser ##########
+######### other programs ##########
 ###################################
 
 chrome:
+	echo "Installing chrome browser"
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
 	sudo apt install -f
 	rm google-chrome-stable_current_amd64
 
 keepass:
+	echo "Installing keepass"
 	sudo add-apt-repository ppa:eugenesan/ppa
 	sudo apt update
 	sudo apt install keepassx
 
-###################################
-########## Shell tools ############
-###################################
-
-byobu:
-	sudo apt install byobu
-
-###################################
-############ redshift #############
-###################################
-
 redshift:
+	echo "Installing redshift"
 	sudo apt install redshift redshift-gtk
+
+###################################
+##### dependencies - utiles #######
+###################################
+
+unzip:
+	echo "Installing unzip"
+	sudo apt install unzip
+
+curl: 
+	echo "Installing curl"
+	sudo apt install curl
