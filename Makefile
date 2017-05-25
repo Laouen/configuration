@@ -33,9 +33,11 @@ pip:
 ## Sublime text and its packages ##
 ###################################
 
+#TODO: make full spaceblack - monaco - base16 configuration automatically
+
 sublime: sublimetext sublime-packages
 
-sublime-packages: bamboo JSHint
+sublime-packages: JSHint
 
 sublimetext: 
 	echo "Installing Sublime text 3"
