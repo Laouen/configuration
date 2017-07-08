@@ -85,6 +85,10 @@ sublime-package-JSHint: nodejs
 	echo "Installing JSHint plugin"
 	git clone https://github.com/victorporof/Sublime-JSHint.git ~/.config/sublime-text-3/Packages/Sublime-JSHint
 
+sublime-package-anaconda:
+	echo "Installing anaconda"
+	git clone https://github.com/DamnWidget/anaconda ~/.config/sublime-text-3/Packages/anaconda
+
 ###################################
 #### Latex editor and packages ####
 ###################################
