@@ -1,4 +1,4 @@
-.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco sublime
+.PHONY: spanish-speller-texmaker guake pip powerline fonts-monaco sublime font-monaco sublime-theme-spaceblack sublime-highlither-base16
 all: update-pkdg prompt sublime ssh-key latex chrome oh-my-zsh-all guake-all byobu git-all
 
 update-pkdg:
@@ -65,6 +65,7 @@ sublime-theme-spaceblack: unzip
 	echo "Installing spacebalck sublime theme" 
 	wget https://github.com/saadq/Spaceblack/archive/master.zip
 	unzip master.zip
+	rm -r ~/.config/sublime-text-3/Packages/Theme\ -\ Spaceblack
 	mv Spaceblack-master ~/.config/sublime-text-3/Packages/Theme\ -\ Spaceblack
 	rm master.zip
 
@@ -77,7 +78,7 @@ sublime-theme-bamboo:
 	echo "Installing Bamboo sublime theme"
 	git clone https://github.com/gzhihao/bamboo-theme.git ~/.config/sublime-text-3/Packages/Theme\ -\ Bamboo
 
-sublime-preferences: font-monaco sublime-theme-spaceblack # spaceblack theme must be installed to not crash wen set as theme
+sublime-preferences: font-monaco sublime-theme-spaceblack sublime-highlither-base16
 	echo "Copying sublime preferences"
 	cp -f ./Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 	
@@ -156,7 +157,7 @@ zsh:
 	echo "Installing zsh"
 	sudo apt install -y zsh
 
-agnoster: pip powerline font-monaco
+agnoster: pip powerline font-monaco-patched
 	echo "setting agnoster zsh theme and powerline patched fonts"
 	cp ./zshrc ~/.zshrc
 
@@ -238,13 +239,6 @@ sinon:
 ###################################
 ######### other programs ##########
 ###################################
-
-chrome:
-	echo "Installing chrome browser"
-	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-	sudo dpkg -i google-chrome-stable_current_amd64.deb
-	sudo apt install -f
-	rm google-chrome-stable_current_amd64
 
 keepass:
 	echo "Installing keepass"
