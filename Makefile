@@ -246,9 +246,15 @@ keepass:
 	sudo apt update
 	sudo apt install keepassx
 
-redshift:
+redshift: redshift-install redshift-configuration
+
+redshift-install:
 	echo "Installing redshift"
 	sudo apt install redshift redshift-gtk
+
+redshift-configuration:
+	echo "setting redshift configurations"
+	sh scripts/redshift-configuration.sh
 
 ###################################
 ##### dependencies - utiles #######
