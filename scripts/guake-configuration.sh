@@ -7,6 +7,10 @@ fi
 
 cp -f ./guake.desktop ~/.config/autostart/
 
+if [ ! -d ~/.gconf/ ]; then
+  mkdir ~/.gconf/
+fi
+
 #checking the apps config folder already exists
 if [ ! -d ~/.gconf/apps/ ]; then
   mkdir ~/.gconf/apps/
