@@ -32,14 +32,17 @@ font-monaco-patched:
 anaconda:
 	echo "installing anaconda"
 	cd /tmp
-	curl -O https://repo.continuum.io/archive/Anaconda3-${version}-Linux-x86_64.sh
+	curl -O https://repo.anaconda.com/archive/Anaconda3-${version}-Linux-x86_64.sh
 	sha256sum Anaconda3-${version}-Linux-x86_64.sh
 	sudo bash ./Anaconda3-${version}-Linux-x86_64.sh
 	source ~/.bashrc
+	echo "anaconda is instaled in bash, to export it to zsh run make version=<installed anaconda version> anaconda_path=<path where is installed anaconda> anaconda-to-zshrc"
+
+anaconda-to-zshrc:
 	source ~/.zshrc
 	echo '' >> ~/.zshrc
-	echo '# added by Anaconda3 4.2.0 installer' >> ~/.zshrc
-	echo 'export PATH="/opt/anaconda3/bin:$PATH"' >> ~/.zshrc
+	echo '# added by Anaconda3 ${version} installer' >> ~/.zshrc
+	echo 'export PATH="${anaconda_path}/bin:$PATH"' >> ~/.zshrc
 	soruce ~/.zshrc
 	cd -
 
