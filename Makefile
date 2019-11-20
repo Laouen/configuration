@@ -58,7 +58,7 @@ pip:
 ## Sublime text and its packages ##
 ###################################
 
-sublime: sublimetext sublime-packages sublime-preferences
+sublime: sublimetext sublime-preferences
 
 sublime-packages: sublime-package-JSHint
 
@@ -73,7 +73,7 @@ sublime-theme-spaceblack: unzip
 	echo "Installing spacebalck sublime theme" 
 	wget https://github.com/saadq/Spaceblack/archive/master.zip
 	unzip master.zip
-	if [ -d ~/.config/sublime-text-3/Installed\ Packages/Packages/Theme\ -\ Spaceblack ]; then rm -r ~/.config/sublime-text-3/Installed\ Packages/Packages/Theme\ -\ Spaceblack fi
+	if [ -d ~/.config/sublime-text-3/Installed\ Packages/Packages/Theme\ -\ Spaceblack ]; then rm -r ~/.config/sublime-text-3/Installed\ Packages/Packages/Theme\ -\ Spaceblack; fi
 	mv Spaceblack-master ~/.config/sublime-text-3/Packages/Theme\ -\ Spaceblack
 	rm master.zip
 
