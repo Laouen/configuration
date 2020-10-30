@@ -1,0 +1,12 @@
+
+# Mount/umount nas in a folder in my user home
+alias mount_nas='mount -t cifs -o username=lbelloli,uid=$(id -u),gid=$(id -g) //157.92.26.23/home ~/nas'
+alias unmount_nas='umount ~/nas'
+
+# Mount/umount piaget
+alias mount_piaget='sshfs lbelloli@piaget.exp.dc.uba.ar:/home/lbelloli/ ~/Piaget/'
+alias unmount_piaget='fusermount -u ~/Piaget/'
+
+# Mount/unmount signos
+alias mount_signos='sshfs lbelloli@signos.liaa.inv.dc.uba.ar:/home/lbelloli/ ~/Signos/ -o ssh_command="ssh -J lbelloli@zorzal.dc.uba.ar"'
+alias unmount_signos='fusermount -u ~/Signos/'
