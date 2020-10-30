@@ -10,3 +10,10 @@ alias unmount_piaget='fusermount -u ~/Piaget/'
 # Mount/unmount signos
 alias mount_signos='sshfs lbelloli@signos.liaa.inv.dc.uba.ar:/home/lbelloli/ ~/Signos/ -o ssh_command="ssh -J lbelloli@zorzal.dc.uba.ar"'
 alias unmount_signos='fusermount -u ~/Signos/'
+
+# Make got and gut also valid command for git
+alias got='git'
+alias gut='git'
+
+# Use please to re run prev comand with sudo (great to sudo run when I forgot to put sudo)
+alias please='sudo "$BASH" -c "$(history -p !!)"'
